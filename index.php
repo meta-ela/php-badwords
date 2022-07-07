@@ -9,6 +9,7 @@ dopo aver sostituito con tre asterischi (***) tutte le occorrenze della parola
 da censurare.
 */
 
+// Creare una variabile con un paragrafo di testo a vostra scelta.
 $title = "La mia prima pagina in PHP";
 $text = "<p>
         At vero eos et accusamus et iusto odio 
@@ -28,10 +29,14 @@ $text = "<p>
         aut reiciendis voluptatibus maiores alias consequatur aut 
         perferendis doloribus asperiores repellat.
         </p>";
-$word = $_GET["word"];
 
-echo "il testo è lungo: " . strlen($text) . " caratteri";
-/* $censoredWord = str_replace($text, $word, "***" ); */
+// Una parola da censurare viene passata dall'utente tramite parametro GET.
+$word = $_GET["word"];
+$censoredText = str_replace($word, " *** ", $text);
+
+/* echo "il testo è lungo: " . strlen($text) . " caratteri";
+echo "<br>";
+echo "il testo censurato è lungo: " . strlen($censoredText) . " caratteri"; */
 
 ?>
 
@@ -44,7 +49,21 @@ echo "il testo è lungo: " . strlen($text) . " caratteri";
     <title>Ciao PHP</title>
 </head>
 <body>
-    <h1> <?php echo $title ?> </h1>
-    <div> <?php echo $text ?> </div>
+    <!-- Stampare a schermo il paragrafo e la sua lunghezza. -->
+    <div style="margin-bottom: 4rem;">
+        <h1> <?php echo $title ?> </h1>
+        <div> <?php echo $text ?> </div>
+        <small> <?php echo "il testo è lungo: " . strlen($text) . " caratteri" ?> </small>
+    </div>
+
+    <!-- Stampare di nuovo il paragrafo e la sua lunghezza, 
+        dopo aver sostituito con tre asterischi (***) tutte le occorrenze della parola 
+        da censurare. 
+    -->
+    <div> 
+        <strong>Testo censurato: </strong>
+        <?php echo $censoredText ?>
+        <small> <?php echo "il testo censurato è lungo: " . strlen($censoredText) . " caratteri" ?> </small>
+    </div>
 </body>
 </html>
