@@ -11,7 +11,7 @@ da censurare.
 
 // Creare una variabile con un paragrafo di testo a vostra scelta.
 $title = "La mia prima pagina in PHP";
-$text = "<p>
+$text = "
         At vero eos et accusamus et iusto odio 
         dignissimos ducimus qui blanditiis praesentium 
         voluptatum deleniti atque corrupti quos dolores 
@@ -28,15 +28,14 @@ $text = "<p>
         Itaque earum rerum hic tenetur a sapiente delectus, ut
         aut reiciendis voluptatibus maiores alias consequatur aut 
         perferendis doloribus asperiores repellat.
-        </p>";
+        ";
 
 // Una parola da censurare viene passata dall'utente tramite parametro GET.
-$word = $_GET["word"];
-$censoredText = str_replace($word, " *** ", $text);
+$word = key_exists("word", $_GET) ? $_GET["word"] : "";
+$censoredText = str_ireplace($word, " *** ", $text);
 
-/* echo "il testo è lungo: " . strlen($text) . " caratteri";
-echo "<br>";
-echo "il testo censurato è lungo: " . strlen($censoredText) . " caratteri"; */
+$textLenght = strlen($text);
+$censoredTextLenght = strlen($censoredText);
 
 ?>
 
@@ -52,8 +51,8 @@ echo "il testo censurato è lungo: " . strlen($censoredText) . " caratteri"; */
     <!-- Stampare a schermo il paragrafo e la sua lunghezza. -->
     <div style="margin-bottom: 4rem;">
         <h1> <?php echo $title ?> </h1>
-        <div> <?php echo $text ?> </div>
-        <small> <?php echo "il testo è lungo: " . strlen($text) . " caratteri" ?> </small>
+        <p> <?php echo $text ?> </p>
+        <small>il testo è lungo: <?php echo $textLenght ?> caratteri </small>
     </div>
 
     <!-- Stampare di nuovo il paragrafo e la sua lunghezza, 
@@ -62,8 +61,8 @@ echo "il testo censurato è lungo: " . strlen($censoredText) . " caratteri"; */
     -->
     <div> 
         <strong>Testo censurato: </strong>
-        <?php echo $censoredText ?>
-        <small> <?php echo "il testo censurato è lungo: " . strlen($censoredText) . " caratteri" ?> </small>
+        <p> <?php echo $censoredText ?> </p>
+        <small>il testo è lungo: <?php echo $censoredTextLenght ?> caratteri </small>
     </div>
 </body>
 </html>
